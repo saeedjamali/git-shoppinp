@@ -1,0 +1,350 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "iranyekan";
+    list-style: none;
+
+}
+
+html {
+    font-size: 0.625rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --navColor: #f8c4f6;
+    --primaryColor: #6d28d9;
+    --secondaryColor: #ede9fe;
+    --mainWhite: #fff;
+    --mainBlack: #222;
+    --mainGray: #7c7c7c;
+    --secondaryGray: #ccc;
+    --mainRed: #db2777;
+    --bodyColor: #f4f0f0;
+    --mainSpacing: 0.1rem;
+    --mainTransition: all 0.3s linear;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-width: 320px;
+}
+
+.navigation {
+    width: 100%;
+    background-color: var(--secondaryColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    height: 6rem;
+    max-width: 1170px;
+    padding: 0 1.5rem;
+    /* //Use Max width  */
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    font-size: 2.4rem;
+
+}
+
+.navbar-cart,
+.navbar-menu {
+    color: var(--primaryColor);
+    font-size: 2.4rem;
+    cursor: pointer;
+}
+
+.navbar-cart {
+    position: relative;
+}
+
+.navbar-items {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    color: var(--mainWhite);
+    background-color: var(--mainRed);
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -1rem;
+    right: -1rem;
+    border-radius: 100%;
+}
+
+/* Main Section */
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--bodyColor);
+    /* height: 90vh; */
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.products {
+    margin-top: 1.8rem;
+    max-width: 1170px;
+    width: 100%;
+    /* background-color: #6d28d9; */
+    /* height: 90vh; */
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    /* justify-content: center; */
+    /* align-items: center; */
+
+}
+
+.products-title {
+    margin: 2rem auto;
+    width: 100%;
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+.product-list {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    /* background-color: var(--mainGray); */
+
+}
+
+.product {
+    height: 32rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+    background-color: var(--mainWhite);
+    border-radius: 8px;
+}
+
+.product-image {
+    border-radius: 8px 8px 0 0;
+    height: 50%;
+    width: 100%;
+
+
+}
+
+.product-desc {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 2rem 0;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.add-to-cart {
+    font-family: Arial, Helvetica, sans-serif;
+    /* height: 3rem; */
+    padding: 1rem;
+    background-color: var(--secondaryColor);
+    color: var(--primaryColor);
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    line-height: 2rem;
+    cursor: pointer;
+    margin: 1rem;
+}
+
+.backdrop {
+    /* width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #7c7c7c;
+    opacity: 0.5;
+    z-index: 1; */
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    backdrop-filter: blur(3px);
+
+}
+
+.show-modal {
+    display: none;
+}
+
+.cart-modal {
+    width: 70%;
+    min-width: 50rem;
+    max-width: 60rem;
+    min-height: 30rem;
+    background-color: var(--mainWhite);
+    opacity: 1;
+    z-index: 10;
+    border-radius: 1rem;
+    position: absolute;
+    box-shadow: 00 5px rgba(0, 0, 0, 0.1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    transition: all 0.5s;
+}
+
+
+
+
+.cart-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.2rem;
+    border: 1px solid var(--secondaryColor);
+    border-radius: 4px;
+    padding: 0.8rem;
+
+}
+
+.cart-image {
+    width: 12rem;
+    height: 4.8rem;
+    border-radius: 0.5rem;
+}
+
+.cart-desc p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.cart-price {
+    color: var(--primaryColor);
+    font-weight: 600;
+}
+
+.cart-quantity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.cart-dec {
+    color: var(--mainRed);
+    cursor: pointer;
+}
+
+.cart-inc {
+    cursor: pointer;
+    color: green;
+}
+
+.cart-remove {
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+.cart-footer {
+
+    width: 100%;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.cart-footer a {
+    display: inline-block;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.cart-clear {
+    background-color: var(--navColor);
+    color: var(--mainRed);
+    padding: 1rem 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.4rem;
+}
+
+.cart-total-price {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.8rem;
+}
+
+.cart-confirm {
+    margin-left: 0.8rem;
+    background-color: green;
+    color: var(--mainWhite);
+    padding: 1rem 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.4rem;
+}
+
+@media only screen and (max-width: 525px) {
+
+    .backdrop {
+        display: none;
+    }
+
+
+    /*Small smartphones [325px -> 425px]*/
+    .cart-modal {
+        margin: 1rem;
+        width: 90%;
+        min-width: 30rem;
+        min-height: 30rem;
+        background-color: var(--secondaryGray);
+        opacity: 1;
+        z-index: 200;
+        border-radius: 1rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+    }
+}
