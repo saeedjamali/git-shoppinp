@@ -21,7 +21,6 @@ createProductList(currentProduct);
 
 
 
-
 function showModal() {
   modal.style.display = "block";
 }
