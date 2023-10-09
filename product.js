@@ -1,5 +1,3 @@
-console.log("Hi Man");
-
 class Product {
   constructor(obj) {
     this.id = obj.id;
