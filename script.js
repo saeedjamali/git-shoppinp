@@ -48,12 +48,12 @@ function createProductList(arr) {
     });
     productListTag.innerHTML = strProduct;
   } else {
-    // alert("No Product Available...")
     productListTag.textContent = "No Product Availabe ....";
   }
 
-  const product = document.querySelectorAll(".product");
-  product.forEach((e) => {
+  const addToCart = document.querySelectorAll(".add-to-cart");
+  console.log(addToCart);
+  addToCart.forEach((e) => {
     e.addEventListener("click", ()=>console.log(e.dataset.productId));
   });
   
@@ -63,18 +63,19 @@ function createProductList(arr) {
 
 
 function setProduct(obj) {
-  let str = ` <div class="product" data-product-id=${obj.id}>
+  return  ` <div class="product" >
       <img class="product-image" src=${obj.imageUrl} alt="p-1" srcset="" />
       <div class="product-desc">
           <span class="product-title">Product : ${obj.title}</span>
           <span class="product-price">${obj.price}</span>
       </div>
-      <div>
-          <a class="add-to-cart">Add To Cart</a>
+      <div>${obj.quantity==0}=0 ?
+          <a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>
+          : console.log("Hi);
       </div>
     </div>`;
 
-  return str;
+  
 }
 
 
