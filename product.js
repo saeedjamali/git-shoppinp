@@ -21,7 +21,7 @@ export const productlist = [
     id: 11,
     title: "ReactJs",
     price: "99 $",
-    quantity: 0,
+    quantity: 1,
     imageUrl: "img/1.jpg",
   },
   {
@@ -65,7 +65,7 @@ export const productlist = [
     id: 19,
     title: "Postgres",
     price: "999 $",
-    quantity: 0,
+    quantity: 1,
     imageUrl: "img/5.jpg",
   },
   {

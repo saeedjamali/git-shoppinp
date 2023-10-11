@@ -69,9 +69,7 @@ function setProduct(obj) {
           <span class="product-title">Product : ${obj.title}</span>
           <span class="product-price">${obj.price}</span>
       </div>
-      <div>${obj.quantity==0}=0 ?
-          <a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>
-          : console.log("Hi);
+      <div>${obj.quantity==0?`<a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>`:`<a data-product-id=${obj.id} class="add-to-cart pointer-event">In Cart Exist</a>`}
       </div>
     </div>`;
 
