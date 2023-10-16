@@ -231,6 +231,11 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y: auto;
+    max-height: 50vh;
+    padding-top: 6rem;
 
 }
 

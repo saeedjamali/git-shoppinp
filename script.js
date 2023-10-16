@@ -11,10 +11,10 @@ currentProduct = savedProducts
 
 
 const productListTag = document.querySelector(".product-list");
+const cartContentTag = document.querySelector(".cart-content");
 
 const modal = document.querySelector(".show-modal");
 document.querySelector(".navbar-cart").addEventListener("click", showModal);
-
 document.querySelector(".backdrop").addEventListener("click", closeModal);
 
 createProductList(currentProduct);
@@ -23,6 +23,7 @@ createProductList(currentProduct);
 
 function showModal() {
   modal.style.display = "block";
+  createCartlist();
 }
 
 function closeModal() {
@@ -58,11 +59,8 @@ function createProductList(arr) {
       const addTocartProduct = currentProduct.find((product) => product.id == e.dataset.productId);
       currentProduct.map((product) => { product.id == e.dataset.productId ? product.quantity = 1 : product.quantity })
       addTocartProduct.quantity = 1;
-      cartProduct.push(addTocartProduct);
       createProductList(currentProduct);
       savedLocalStorage("products", currentProduct);
-      console.log(cartProduct);
-      console.log(currentProduct);
 
 
     });
@@ -71,6 +69,26 @@ function createProductList(arr) {
 
 
 }
+
+
+function createCartlist() {
+  cartProduct = currentProduct.filter((product) => product.quantity != 0);
+  let strCartProduct = "";
+  if (cartProduct) {
+    cartProduct.forEach(product => {
+      strCartProduct += setCart(product);
+    });
+    cartContentTag.innerHTML = strCartProduct;
+  } else {
+    cartContentTag.textContent = "No Product in Cart Availabe ....";
+  }
+
+}
+
+
+
+
+
 
 
 function setProduct(obj) {
@@ -87,6 +105,24 @@ function setProduct(obj) {
 
 }
 
+
+function setCart(obj) {
+  return `  <div class="cart">
+      <img class="cart-image" src=${obj.imageUrl} alt="" srcset="" />
+      <div div class="cart-desc">
+      <p class="cart-title">${obj.title}</p>
+      <p class="cart-price">${obj.price}</p>
+  </div>
+  <div class="cart-quantity">
+      <i class="cart-inc fas fa-chevron-circle-up"></i>
+      <p class="cart-counter">${obj.quantity}</p>
+      <i class="cart-dec fas fa-chevron-circle-down"></i>
+  </div>
+    <i class="cart-remove fa fa-trash"></i>
+</div>`;
+
+
+}
 
 
 
