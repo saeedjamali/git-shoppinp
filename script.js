@@ -1,25 +1,41 @@
-import { productlist } from './product.js';
+import { productlist } from "./product.js";
 // console.log(productlist);
 
-
-let currentProduct = [], savedProducts = [], cartProduct = [];
+let currentProduct = [],
+  savedProducts = [],
+  cartProduct = [];
 
 if (!getLocalStorage("products")) savedLocalStorage("products", productlist);
-document.addEventListener("DOMContentLoaded", savedProducts = getLocalStorage("products"));
-currentProduct = savedProducts
+document.addEventListener(
+  "DOMContentLoaded",
+  (savedProducts = getLocalStorage("products"))
+);
+currentProduct = savedProducts;
 // console.log(currentProduct);
-
 
 const productListTag = document.querySelector(".product-list");
 const cartContentTag = document.querySelector(".cart-content");
+const cartTotalPrice = document.querySelector(".cart-total-price");
+const navbarItems = document.querySelector(".navbar-items");
+const clearCart = document.querySelector(".cart-clear");
 
 const modal = document.querySelector(".show-modal");
 document.querySelector(".navbar-cart").addEventListener("click", showModal);
 document.querySelector(".backdrop").addEventListener("click", closeModal);
 
+clearCart.addEventListener("click", () => {
+  currentProduct.map((product) => (product.quantity = 0));
+  savedLocalStorage("products", currentProduct);
+  createProductList(currentProduct);
+});
+
 createProductList(currentProduct);
 
-
+function showNavbarCounter() {
+  navbarItems.innerHTML = currentProduct.filter(
+    (product) => product.quantity != 0
+  ).length;
+}
 
 function showModal() {
   modal.style.display = "block";
@@ -37,14 +53,13 @@ function getLocalStorage(str) {
 
 function savedLocalStorage(str, arr) {
   localStorage.setItem(str, JSON.stringify(arr));
-
 }
 
-
 function createProductList(arr) {
+  showNavbarCounter();
   let strProduct = "";
   if (arr) {
-    arr.forEach(element => {
+    arr.forEach((element) => {
       strProduct += setProduct(element);
     });
     productListTag.innerHTML = strProduct;
@@ -56,32 +71,37 @@ function createProductList(arr) {
   console.log(addToCart);
   addToCart.forEach((e) => {
     e.addEventListener("click", () => {
-      const addTocartProduct = currentProduct.find((product) => product.id == e.dataset.productId);
-      currentProduct.map((product) => { product.id == e.dataset.productId ? product.quantity = 1 : product.quantity })
+      const addTocartProduct = currentProduct.find(
+        (product) => product.id == e.dataset.productId
+      );
+      currentProduct.map((product) => {
+        product.id == e.dataset.productId
+          ? (product.quantity = 1)
+          : product.quantity;
+      });
       addTocartProduct.quantity = 1;
       createProductList(currentProduct);
       savedLocalStorage("products", currentProduct);
-
-
     });
   });
-
-
-
 }
 
-
 function createCartlist() {
+  window.scrollTo(0, 0); // values are x,y-offset
   cartProduct = currentProduct.filter((product) => product.quantity != 0);
   let strCartProduct = "";
-  if (cartProduct) {
-    cartProduct.forEach(product => {
+  let sumOfPrice = 0;
+  if (cartProduct.length) {
+    cartProduct.forEach((product) => {
       strCartProduct += setCart(product);
+      sumOfPrice += product.quantity * Number(product.price.slice(0, -1));
     });
     cartContentTag.innerHTML = strCartProduct;
   } else {
     cartContentTag.textContent = "No Product in Cart Availabe ....";
   }
+
+  cartTotalPrice.textContent = "Total Price : " + sumOfPrice + "$";
 
   const cartInc = document.querySelectorAll(".cart-inc");
   const cartDec = document.querySelectorAll(".cart-dec");
@@ -90,7 +110,9 @@ function createCartlist() {
   cartInc.forEach((e) => {
     e.addEventListener("click", () => {
       console.log(e.dataset.productId);
-      const incProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      const incProduct = currentProduct.find(
+        (product) => product.id == e.dataset.productId
+      );
       incProduct.quantity++;
       createCartlist();
       savedLocalStorage("products", currentProduct);
@@ -100,16 +122,16 @@ function createCartlist() {
 
   cartDec.forEach((e) => {
     e.addEventListener("click", () => {
-      const decProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      const decProduct = currentProduct.find(
+        (product) => product.id == e.dataset.productId
+      );
       if (decProduct.quantity > 1) {
-        decProduct.quantity--
-      }
-      else {
-        decProduct.quantity == 0;
-        cartProduct = currentProduct.filter((product) => product.id != e.dataset.productId);
-       console.log("Has Removed.....");
-       console.log(cartProduct);
-
+        decProduct.quantity--;
+      } else {
+        decProduct.quantity = 0;
+        cartProduct = currentProduct.filter((product) => product.quantity != 0);
+        console.log("Has Removed.....");
+        console.log(cartProduct);
       }
       console.log(decProduct.quantity);
       createCartlist();
@@ -118,23 +140,23 @@ function createCartlist() {
     });
   });
 
-
   cartRemove.forEach((e) => {
     e.addEventListener("click", () => {
       console.log(e.dataset.productId);
-      const removeProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      const removeProduct = currentProduct.find(
+        (product) => product.id == e.dataset.productId
+      );
       removeProduct.quantity = 0;
-      cartProduct = currentProduct.filter((product) => product.id != e.dataset.productId);
+      cartProduct = currentProduct.filter(
+        (product) => product.id != e.dataset.productId
+      );
+      console.log(cartProduct);
       createCartlist();
       savedLocalStorage("products", currentProduct);
       createProductList(currentProduct);
     });
   });
-
-
-
 }
-
 
 function setProduct(obj) {
   return ` <div class="product" >
@@ -143,13 +165,14 @@ function setProduct(obj) {
           <span class="product-title">Product : ${obj.title}</span>
           <span class="product-price">${obj.price}</span>
       </div>
-      <div>${obj.quantity == 0 ? `<a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>` : `<a data-product-id=${obj.id} class="add-to-cart pointer-event">In Cart Exist</a>`}
+      <div>${
+        obj.quantity == 0
+          ? `<a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>`
+          : `<a data-product-id=${obj.id} class="add-to-cart pointer-event">In Cart Exist</a>`
+      }
       </div>
     </div>`;
-
-
 }
-
 
 function setCart(obj) {
   return `<div class="cart">
@@ -165,27 +188,4 @@ function setCart(obj) {
   </div>
     <i class="cart-remove fa fa-trash" data-product-id=${obj.id}></i>
 </div>`;
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
