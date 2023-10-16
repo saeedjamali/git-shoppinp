@@ -235,7 +235,7 @@ body {
     overflow-x:hidden;
     overflow-y: auto;
     max-height: 50vh;
-    padding-top: 6rem;
+    padding-top: 10rem;
 
 }
 
@@ -293,7 +293,7 @@ body {
 .cart-footer {
 
     width: 100%;
-    padding-bottom: 1rem;
+    padding: 1.4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

@@ -83,12 +83,57 @@ function createCartlist() {
     cartContentTag.textContent = "No Product in Cart Availabe ....";
   }
 
+  const cartInc = document.querySelectorAll(".cart-inc");
+  const cartDec = document.querySelectorAll(".cart-dec");
+  const cartRemove = document.querySelectorAll(".cart-remove");
+
+  cartInc.forEach((e) => {
+    e.addEventListener("click", () => {
+      console.log(e.dataset.productId);
+      const incProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      incProduct.quantity++;
+      createCartlist();
+      savedLocalStorage("products", currentProduct);
+      createProductList(currentProduct);
+    });
+  });
+
+  cartDec.forEach((e) => {
+    e.addEventListener("click", () => {
+      const decProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      if (decProduct.quantity > 1) {
+        decProduct.quantity--
+      }
+      else {
+        decProduct.quantity == 0;
+        cartProduct = currentProduct.filter((product) => product.id != e.dataset.productId);
+       console.log("Has Removed.....");
+       console.log(cartProduct);
+
+      }
+      console.log(decProduct.quantity);
+      createCartlist();
+      savedLocalStorage("products", currentProduct);
+      createProductList(currentProduct);
+    });
+  });
+
+
+  cartRemove.forEach((e) => {
+    e.addEventListener("click", () => {
+      console.log(e.dataset.productId);
+      const removeProduct = currentProduct.find((product) => product.id == e.dataset.productId);
+      removeProduct.quantity = 0;
+      cartProduct = currentProduct.filter((product) => product.id != e.dataset.productId);
+      createCartlist();
+      savedLocalStorage("products", currentProduct);
+      createProductList(currentProduct);
+    });
+  });
+
+
+
 }
-
-
-
-
-
 
 
 function setProduct(obj) {
@@ -107,18 +152,18 @@ function setProduct(obj) {
 
 
 function setCart(obj) {
-  return `  <div class="cart">
+  return `<div class="cart">
       <img class="cart-image" src=${obj.imageUrl} alt="" srcset="" />
       <div div class="cart-desc">
       <p class="cart-title">${obj.title}</p>
       <p class="cart-price">${obj.price}</p>
   </div>
   <div class="cart-quantity">
-      <i class="cart-inc fas fa-chevron-circle-up"></i>
+      <i class="cart-inc fas fa-chevron-circle-up" data-product-id=${obj.id}></i>
       <p class="cart-counter">${obj.quantity}</p>
-      <i class="cart-dec fas fa-chevron-circle-down"></i>
+      <i class="cart-dec fas fa-chevron-circle-down" data-product-id=${obj.id}></i>
   </div>
-    <i class="cart-remove fa fa-trash"></i>
+    <i class="cart-remove fa fa-trash" data-product-id=${obj.id}></i>
 </div>`;
 
 
