@@ -198,13 +198,15 @@ body {
 
 .show-modal {
     display: none;
+
 }
 
 .cart-modal {
     width: 70%;
     min-width: 50rem;
     max-width: 60rem;
-    min-height: 30rem;
+    min-height: 30vh;
+    overflow: hidden;
     background-color: var(--mainWhite);
     opacity: 1;
     z-index: 10;
@@ -223,7 +225,11 @@ body {
 }
 
 
-
+.cart-header {
+    display: block;
+    height: 3rem;
+    padding: 1.8rem;
+}
 
 .cart-content {
     display: flex;
@@ -231,11 +237,12 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    overflow:scroll;
-    overflow-x:hidden;
+    max-height: 50rem;
+    overflow: scroll;
+    overflow-x: hidden;
     overflow-y: auto;
     max-height: 50vh;
-    padding-top: 10rem;
+    padding-top: 1rem;
 
 }
 
@@ -330,7 +337,7 @@ body {
 }
 
 
-.pointer-event{
+.pointer-event {
     pointer-events: none;
 }
 
@@ -354,7 +361,7 @@ body {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
 
     }
 }
