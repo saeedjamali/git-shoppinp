@@ -14,6 +14,7 @@ class Product {
   }
 }
 
+
 export const productlist = [
   {
     id: 11,
