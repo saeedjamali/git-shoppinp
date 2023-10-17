@@ -162,14 +162,14 @@ function setProduct(obj) {
   return ` <div class="product" >
       <img class="product-image" src=${obj.imageUrl} alt="p-1" srcset="" />
       <div class="product-desc">
-          <span class="product-title">Product : ${obj.title}</span>
-          <span class="product-price">${obj.price}</span>
+      <span class="product-price">${obj.price}</span>
+          <span class="product-title">${obj.title}</span>
+          
       </div>
-      <div>${
-        obj.quantity == 0
-          ? `<a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>`
-          : `<a data-product-id=${obj.id} class="add-to-cart pointer-event">In Cart Exist</a>`
-      }
+      <div>${obj.quantity == 0
+      ? `<a data-product-id=${obj.id} class="add-to-cart">Add To Cart</a>`
+      : `<a data-product-id=${obj.id} class="add-to-cart pointer-event">In Cart Exist</a>`
+    }
       </div>
     </div>`;
 }

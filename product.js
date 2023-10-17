@@ -1,20 +1,4 @@
 
-class Product {
-  constructor(obj) {
-    this.id = obj.id;
-    this.title = obj.title;
-    this.price = obj.price;
-    this.quantity = obj.quantity;
-    this.imageUrl = obj.imageUrl;
-    this.createdAt = obj.createdAt;
-    this.updatedAt = obj.updatedAt;
-  }
-
-  static getId() {
-    return this;
-  }
-}
-
 
 export const productlist = [
   {
